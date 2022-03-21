@@ -104,7 +104,7 @@ export class Koncert{
                     });
                 });
             });
-        odabranaSala.drawSala(zauzeta); //i onda samo tu jos to
+        odabranaSala.drawSala(zauzeta); 
         
         await fetch(`https:localhost:5001/Koncert/vratiKoncert/`+k.id,{
             method: "GET"

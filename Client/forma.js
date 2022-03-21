@@ -164,7 +164,7 @@ export class Forma{
         div_koncert.appendChild(document.createElement("br"));
         div_koncert.appendChild(document.createElement("br"));
 
-        //kretiraj koncert button
+        //kreiraj koncert button
          
         const button_kreiraj_koncert = document.createElement("button");
         button_kreiraj_koncert.setAttribute("id","button_kreiraj_koncert");
