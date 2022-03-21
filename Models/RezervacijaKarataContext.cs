@@ -9,7 +9,6 @@ namespace Models
         public DbSet<Sala> Sale {get;set;}
         public DbSet<Grad> Gradovi {get;set;}
         public DbSet<Rezervacija> Rezervacije {get;set;}
-        public DbSet<KoncertIzvodjac> KoncertIzvodjac {get;set;}
         public RezervacijaKarataContext(DbContextOptions options) : base(options)
         {
 
@@ -19,15 +18,9 @@ namespace Models
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<KoncertIzvodjac>()
-                        .HasOne(k => k.Koncert)
-                        .WithMany(ki => ki.KoncertIzvodjac)
-                        .HasForeignKey(kid => kid.KoncertId);
-
-            modelBuilder.Entity<KoncertIzvodjac>()
-                        .HasOne(i => i.Izvodjac)
-                        .WithMany(ki => ki.KoncertIzvodjac)
-                        .HasForeignKey(iid => iid.IzvodjacId);
+             
+            modelBuilder.Entity<Koncert>()
+                        .HasOne(s => s.Izvodjac);
             
             modelBuilder.Entity<Koncert>()
                         .HasOne(s => s.Sala)
@@ -35,10 +28,6 @@ namespace Models
            
             modelBuilder.Entity<Sala>()
                         .HasOne(s => s.Grad);
-                                                                        
-            modelBuilder.Entity<Rezervacija>()
-                        .HasOne(s => s.Koncert);
-                        
             
         }
     }

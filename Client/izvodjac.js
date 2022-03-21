@@ -7,6 +7,9 @@ export class Izvodjac{
         this.prezime=prezime;
         this.instrument=instrument;
     }
+    returnIzvodjace(){
+        return izvodjaci_niz;
+    }
     async dodajIzvodjaca(){
         if (document.getElementById("input_izvodjac_ime").value=="" 
         || document.getElementById("input_izvodjac_prezime").value=="" 

@@ -150,14 +150,31 @@ export class Forma{
         div_koncert.appendChild(button_dodaj_izvodjaca);
         div_koncert.appendChild(document.createElement("br"));
 
-        
+       
+        //datum
+        const label_datum_vreme = document.createElement("label");
+        label_datum_vreme.innerHTML = "Datum/Vreme: ";
+        div_koncert.appendChild(label_datum_vreme);
+        div_koncert.appendChild(document.createElement("br"));
+
+        const input_datum_vreme = document.createElement("input");
+        input_datum_vreme.setAttribute("id","input_datum_vreme")
+        input_datum_vreme.type="datetime-local";
+        div_koncert.appendChild(input_datum_vreme);
+        div_koncert.appendChild(document.createElement("br"));
+        div_koncert.appendChild(document.createElement("br"));
+
+        //kretiraj koncert button
+         
         const button_kreiraj_koncert = document.createElement("button");
         button_kreiraj_koncert.setAttribute("id","button_kreiraj_koncert");
         button_kreiraj_koncert.innerHTML = "kreiraj koncert";
         div_koncert.appendChild(button_kreiraj_koncert);
         div_koncert.appendChild(document.createElement("br"));
-        
-       
+        div_koncert.appendChild(document.createElement("br"));
+
+
+       //odabir
 
         const label_odaberi_koncert = document.createElement("label");
         label_odaberi_koncert.innerHTML = "Odaberi koncert: ";
@@ -187,6 +204,32 @@ export class Forma{
         button_kupi_kartu.innerHTML = "kupi kartu";
         div_koncert.appendChild(button_kupi_kartu);
         //button_kupi_kartu.disabled=true;
-    
+        div_koncert.appendChild(document.createElement("br"));
+
+        const div_koncert_info = document.createElement("div");
+        div_koncert_info.setAttribute("id","div_koncert_info")
+        div_koncert.appendChild(div_koncert_info);
+        //button_kupi_kartu.disabled=true;
+
+        const label_koncert_ime = document.createElement("label");
+        label_koncert_ime.setAttribute("id","label_koncert_ime");
+        div_koncert_info.appendChild(label_koncert_ime);
+        div_koncert_info.appendChild(document.createElement("br"));
+
+        const label_koncert_datum = document.createElement("label");
+        label_koncert_datum.setAttribute("id","label_koncert_datum");
+        div_koncert_info.appendChild(label_koncert_datum);
+        div_koncert_info.appendChild(document.createElement("br"));
+        
+        const label_koncert_izvodjac = document.createElement("label");
+        label_koncert_izvodjac.setAttribute("id","label_koncert_izvodjac")
+        div_koncert_info.appendChild(label_koncert_izvodjac);
+        div_koncert_info.appendChild(document.createElement("br"));
+
+        const label_koncert_sala= document.createElement("label");
+        label_koncert_sala.setAttribute("id","label_koncert_sala")
+        div_koncert_info.appendChild(label_koncert_sala);
+        div_koncert_info.appendChild(document.createElement("br"));
+
     }
 }

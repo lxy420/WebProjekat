@@ -20,7 +20,6 @@ namespace Models
         
         [MaxLength(20)]
         public string Instrument {get;set;}
-        public List<KoncertIzvodjac> KoncertIzvodjac {get;set;}
 
     }
 

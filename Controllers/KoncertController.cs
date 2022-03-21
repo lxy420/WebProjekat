@@ -42,6 +42,14 @@ namespace web_projekat.Controllers
             List<Koncert> koncert = Context.Koncerti.ToList();
             return Ok(koncert);
         }
+
+         [Route("VratiKoncert/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> VratiKoncert(int id)
+        {
+            Koncert koncert = Context.Koncerti.Find(id);
+            return Ok(koncert);
+        }
          [Route("ucitajIzabraniKoncert/{id}")]
         [HttpGet]
         public async Task<IActionResult> ucitajIzabraniKoncert(int id)

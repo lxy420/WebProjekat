@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Models
 {
@@ -9,9 +11,8 @@ namespace Models
         [Key]
         public int Id {get;set;}
         
-        [Required]
-        public Koncert Koncert {get;set;}
-    
+        public int KoncertId {get;set;}
+
         public string Telefon  {get;set;}
 
         public int Sediste  {get;set;}

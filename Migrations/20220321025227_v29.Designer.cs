@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Models;
 
@@ -11,9 +12,10 @@ using Models;
 namespace web_projekat.Migrations
 {
     [DbContext(typeof(RezervacijaKarataContext))]
-    partial class RezervacijaKarataContextModelSnapshot : ModelSnapshot
+    [Migration("20220321025227_v29")]
+    partial class v29
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,6 +119,8 @@ namespace web_projekat.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("KoncertId");
+
                     b.ToTable("Rezervacija");
                 });
 
@@ -163,6 +167,17 @@ namespace web_projekat.Migrations
                     b.Navigation("Izvodjac");
 
                     b.Navigation("Sala");
+                });
+
+            modelBuilder.Entity("Models.Rezervacija", b =>
+                {
+                    b.HasOne("Models.Koncert", "Koncert")
+                        .WithMany()
+                        .HasForeignKey("KoncertId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Koncert");
                 });
 
             modelBuilder.Entity("Models.Sala", b =>

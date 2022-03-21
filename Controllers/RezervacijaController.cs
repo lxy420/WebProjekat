@@ -22,36 +22,16 @@ namespace web_projekat.Controllers
         [HttpPost]
         public async Task<IActionResult>DodajRezervaciju([FromBody] Rezervacija rezervacija)
         {
-         //   if (Context.Gradovi.Any(o => o.Ime == grad.Ime)) 
-                return StatusCode(400,"Grad vec postoji.");
-
-       //     Context.Gradovi.Add(grad);
-         //   await Context.SaveChangesAsync();
-           // return StatusCode(200,"Grad je dodat.");
-
-        }
-/* 
-        [Route("VratiGradove")]
-        [HttpGet]
-        public async Task<IActionResult> VratiGradove()
-        {
-            List<Grad> gradovi = Context.Gradovi.ToList();
-            return Ok(gradovi);
-        }
-
-        [Route("ObrisiGradove")]
-        [HttpDelete]
-        public async Task<IActionResult>ObrisiGradove()
-        {
-            foreach (var sala in Context.Sale){
-                Context.Sale.Remove(sala);
-            }
-            foreach (var grad in Context.Gradovi){
-                Context.Gradovi.Remove(grad);
-            }
+            Context.Rezervacije.Add(rezervacija);
             await Context.SaveChangesAsync();
-            return StatusCode(200,"Svi gradovi su obrisani.");
+            return StatusCode(200,"Rezervacija uspesna.");
         }
-    } */
-}
+
+        [Route("VratiZauzeta/{id}")]
+        [HttpGet]
+        public async Task<IActionResult>VratiZauzeta(int id)
+        {
+            return Ok(Context.Rezervacije.Where(x=>x.KoncertId==id).ToList());
+        }
+    }
 }

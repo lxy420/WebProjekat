@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Models;
 
@@ -11,9 +12,10 @@ using Models;
 namespace web_projekat.Migrations
 {
     [DbContext(typeof(RezervacijaKarataContext))]
-    partial class RezervacijaKarataContextModelSnapshot : ModelSnapshot
+    [Migration("20220321025932_v31")]
+    partial class v31
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,7 +85,7 @@ namespace web_projekat.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("IzvodjacId")
+                    b.Property<int?>("IzvodjacId")
                         .HasColumnType("int");
 
                     b.Property<int>("SalaId")
@@ -117,6 +119,8 @@ namespace web_projekat.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("KoncertId");
+
                     b.ToTable("Rezervacija");
                 });
 
@@ -149,10 +153,8 @@ namespace web_projekat.Migrations
             modelBuilder.Entity("Models.Koncert", b =>
                 {
                     b.HasOne("Models.Izvodjac", "Izvodjac")
-                        .WithMany()
-                        .HasForeignKey("IzvodjacId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Koncert")
+                        .HasForeignKey("IzvodjacId");
 
                     b.HasOne("Models.Sala", "Sala")
                         .WithMany("Koncert")
@@ -163,6 +165,17 @@ namespace web_projekat.Migrations
                     b.Navigation("Izvodjac");
 
                     b.Navigation("Sala");
+                });
+
+            modelBuilder.Entity("Models.Rezervacija", b =>
+                {
+                    b.HasOne("Models.Koncert", "Koncert")
+                        .WithMany()
+                        .HasForeignKey("KoncertId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Koncert");
                 });
 
             modelBuilder.Entity("Models.Sala", b =>
@@ -177,6 +190,11 @@ namespace web_projekat.Migrations
             modelBuilder.Entity("Models.Grad", b =>
                 {
                     b.Navigation("Sala");
+                });
+
+            modelBuilder.Entity("Models.Izvodjac", b =>
+                {
+                    b.Navigation("Koncert");
                 });
 
             modelBuilder.Entity("Models.Sala", b =>

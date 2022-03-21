@@ -1,30 +1,45 @@
 import { Sala } from "./sala.js";
+import { Izvodjac } from "./izvodjac.js";
 
 var koncerti_niz=[];
 var sale_niz=[];
+var izvodjaci_niz=[];
 var odabranaSala=null;
+var zauzeta=[];
 
 export class Koncert{
-    constructor(id,salaid,ime){
+    constructor(id,salaid,ime,datum,izvodjacid){
         this.id=id;
         this.salaid=salaid;
         this.ime=ime;
+        this.datum=datum;
+        this.izvodjacid=izvodjacid;
+    }
+    getKoncerti(){
+        return koncerti_niz;
     }
     setSale(s){
         sale_niz=s;
     }
+    setIzvodjace(i){
+        izvodjaci_niz=i;
+    }
     async kreirajKoncert(){
-        if (document.getElementById("input_ime_koncerta").value=="" || document.getElementById("select_grad").value==""|| document.getElementById("select_sala").value==""|| document.getElementById("select_izvodjac").value==""){
+        if (document.getElementById("input_ime_koncerta").value=="" || document.getElementById("select_grad").value==""|| document.getElementById("select_sala").value==""|| document.getElementById("select_izvodjac").value=="" || document.getElementById("input_datum_vreme").value==""){
             alert("Popunite sva polja.");
             return
         }
         var id_sale=sale_niz.find(g=>g.ime==document.getElementById("select_sala").value).id;
+        var id_izvodjac=izvodjaci_niz.find(g=>g.ime==document.getElementById("select_izvodjac").value).id;
+        var datum_vreme=document.getElementById("input_datum_vreme").value;
         await fetch(`https:localhost:5001/Koncert/DodajKoncert/`+id_sale,{
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 ime:document.getElementById("input_ime_koncerta").value,
                 salaid: id_sale,
+                izvodjacid: id_izvodjac,
+                date: datum_vreme
             })
         }).then(p => {
             if (p.status == 400) {
@@ -79,7 +94,30 @@ export class Koncert{
                 .then(data => {
                     odabranaSala=new Sala(data.id,data.ime,data.kapacitet);
                 });
-        odabranaSala.drawSala();
+
+        await fetch(`https:localhost:5001/Rezervacija/VratiZauzeta/`+k.id,{
+            method: "GET"
+            }).then(p => {
+                p.json().then(data => {
+                    data.forEach(i => {
+                        zauzeta.push(i.sediste);
+                    });
+                });
+            });
+        odabranaSala.drawSala(zauzeta); //i onda samo tu jos to
+        
+        await fetch(`https:localhost:5001/Koncert/vratiKoncert/`+k.id,{
+            method: "GET"
+            }).then(response => response.json())
+            .then(data => {
+                //var odabraniKoncert=new Koncert(data.id,data.salaId,data.ime,data.date,data.izvodjacId);
+               // console.log(odabraniKoncert);
+               document.getElementById("label_koncert_ime").innerHTML="ime: "+koncerti_niz.find(g=>g.id==data.id).ime;
+               document.getElementById("label_koncert_datum").innerHTML="datum/vreme: "+data.date;
+               document.getElementById("label_koncert_izvodjac").innerHTML="izvodjac: "+izvodjaci_niz.find(s=>s.id==data.izvodjacId).ime;
+               document.getElementById("label_koncert_sala").innerHTML="sala: "+sale_niz.find(s=>s.id==data.salaId).ime;
+            });
+
     }
     getLen(){
         return koncerti_niz.length;
