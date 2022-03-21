@@ -114,7 +114,7 @@ export class Koncert{
                // console.log(odabraniKoncert);
                document.getElementById("label_koncert_ime").innerHTML="ime: "+koncerti_niz.find(g=>g.id==data.id).ime;
                document.getElementById("label_koncert_datum").innerHTML="datum/vreme: "+data.date;
-               document.getElementById("label_koncert_izvodjac").innerHTML="izvodjac: "+izvodjaci_niz.find(s=>s.id==data.izvodjacId).ime;
+               document.getElementById("label_koncert_izvodjac").innerHTML="izvodjac: "+izvodjaci_niz.find(s=>s.id==data.izvodjacId).ime+" "+izvodjaci_niz.find(s=>s.id==data.izvodjacId).prezime;
                document.getElementById("label_koncert_sala").innerHTML="sala: "+sale_niz.find(s=>s.id==data.salaId).ime;
             });
 

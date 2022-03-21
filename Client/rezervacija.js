@@ -16,7 +16,7 @@ export class Rezervacija{
             })
         }).then(p => {
             if (p.status == 400) {
-                p=1;
+                alert("Doslo je do greske.");
             }
         });
     }

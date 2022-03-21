@@ -41,7 +41,7 @@ export class Izvodjac{
                 }).then(p => {
                     p.json().then(data => {
                         data.forEach(i => {
-                            izvodjaci_niz.push(new Izvodjac(i.id,i.ime,i.instrument));
+                            izvodjaci_niz.push(new Izvodjac(i.id,i.ime,i.prezime,i.instrument));
                             var opt = document.createElement("option");
                             opt.value = i.ime;
                             opt.innerHTML = i.ime;

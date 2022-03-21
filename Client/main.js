@@ -23,9 +23,6 @@ async function setup(){
     await izvodjac.ucitajIzvodjace();
     await koncert.ucitajKoncerte();
     await sala.ucitajSale();
-    await koncert.setSale(sala.returnSale());
-    await koncert.setIzvodjace(izvodjac.returnIzvodjace());
-    await koncert.ucitajIzabraniKoncert(document.getElementById("select_koncert").value)
 }
 
 //events
@@ -57,6 +54,8 @@ document.getElementById("button_obrisi_koncerte").onclick = async (ev) => {
 };
 
 document.getElementById("select_koncert").addEventListener("click",async (e)=>{
+    if (koncert.getKoncerti().length==0)
+        return
     await koncert.setSale(sala.returnSale());
     await koncert.setIzvodjace(izvodjac.returnIzvodjace());
     await koncert.ucitajIzabraniKoncert(document.getElementById("select_koncert").value)
@@ -76,4 +75,6 @@ document.getElementById("button_kupi_kartu").onclick =async (ev) => {
         var r=new Rezervacija(0,koncert.getKoncerti().find(x=>x.ime==document.getElementById("select_koncert").value).id,document.getElementById("input_telefon").value,ss[i]);
         await r.dodajRezervaciju();
     }
+    alert("Rezervacija uspesna");
+    location.reload();
 };
