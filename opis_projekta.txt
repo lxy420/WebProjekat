@@ -1,0 +1,20 @@
+Projekat ima za cilj rezervisanje karata za koncert.
+
+U "admin" panelu, mogu da se dodaju ime koncerta, grad, 
+sala za selektovani grad, izvodjac na koncertu i datum i vreme koncerta.
+Nakon toga koncert moze biti kreiran.
+
+Novokreirani koncert ce biti prikazan u "korisnickom" delu,
+gde se, nakon odabira, isti vizuelno prikazuje u vidu sale tj. njenih mesta.
+Korisnik moze da vidi koja mesta su slobodna i da rezervise svoja ("kupovina karte").
+Preduslov za kupovinu karte jeste unet telefon (id kupca) i selektovano min 1 sediste.
+
+Vec rezervisana sedista prikazana su crvenom bojom, a sedista koja korisnik trenutno bira
+prikazana su plavom.
+
+Nakon svake nove rezervacije, ili bilo kakve promene na sajtu, 
+izmenjeni podaci se automatski ucitavaju i promena je vidljiva.
+
+
+screenshot: https://ibb.co/qY92LsH
+
